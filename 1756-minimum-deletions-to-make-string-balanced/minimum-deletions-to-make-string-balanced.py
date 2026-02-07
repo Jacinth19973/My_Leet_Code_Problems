@@ -1,14 +1,12 @@
 class Solution:
     def minimumDeletions(self, s: str) -> int:
-        n = len(s)
-        f = [0] * (n + 1)  
-        b = 0              
-  
-        for i, c in enumerate(s, 1):  
+        deletions = 0
+        b_count = 0
+
+        for c in s:
             if c == 'b':
-                f[i] = f[i - 1]
-                b += 1
-            else: 
-                f[i] = min(f[i - 1] + 1, b)
-  
-        return f[n]        
+                b_count += 1
+            else:  # c == 'a'
+                deletions = min(deletions + 1, b_count)
+
+        return deletions
