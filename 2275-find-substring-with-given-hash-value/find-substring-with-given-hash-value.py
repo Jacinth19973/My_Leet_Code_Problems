@@ -1,16 +1,14 @@
 class Solution:
-    def subStrHash(self, s, p, m, k, hashValue):
-        def val(c):
-            return ord(c) - ord('a') + 1
-            
-        res = n = len(s)
-        pk = pow(p,k,m)
+    def subStrHash(self, s: str, p: int, m: int, k: int, hashValue: int) -> str:
+        n = len(s)
+        vals = [ord(c) - 96 for c in s]
+        pk = pow(p, k, m)
         cur = 0
-
-        for i in xrange(n - 1, -1, -1):
-            cur = (cur * p + val(s[i])) % m
+        res = n
+        for i in range(n - 1, -1, -1):
+            cur = (cur * p + vals[i]) % m
             if i + k < n:
-                cur = (cur - val(s[i + k]) * pk) % m
+                cur = (cur - vals[i + k] * pk) % m
             if cur == hashValue:
-                res = i
-        return s[res: res + k]
+                res = i      
+        return s[res : res + k]
